@@ -1,0 +1,104 @@
+<h2>
+    Validaciones reactivas</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+        <form [formGroup]="miformulario" (ngSubmit)="submitFormulario()">
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">nombre</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                           class="form-control" 
+                           placeholder="Nombre del usuario"
+                           formControlName="nombre">
+                      <span class="form-text text-danger"
+                            *ngIf="camponovalido('nombre')">debe ser en formato de nombre y apellido</span>     
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" 
+                           class="form-control" 
+                           placeholder="email del usuario"
+                           formControlName="email">
+
+                           <span class="form-text text-danger"
+                           *ngIf="camponovalido('email')">{{emailErrorMsg}}</span>         
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">Username</label>
+                <div class="col-sm-9">
+                    <input type="text" 
+                           class="form-control" 
+                           formControlName="username"
+                           placeholder="nombre codigo  del usuario">
+                           <span class="form-text text-danger"
+                           *ngIf="camponovalido('username')">El usuario dno debe ser strider</span>    
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">password</label>
+                <div class="col-sm-9">
+                    <input type="password" 
+                           class="form-control" 
+                           placeholder="password de su cuenta"
+                           formControlName="password">
+                </div>
+                <span class="form-text text-danger"
+                *ngIf="camponovalido('password')">La contraseña debe ser mayor a 6 caracteres</span>    
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-3 col-form-label">confirmar</label>
+                <div class="col-sm-9">
+                    <input type="password" 
+                           class="form-control" 
+                           placeholder="confirmar la contraseña"
+                           formControlName="password2">
+                </div>
+                <span class="form-text text-danger"
+                *ngIf="camponovalido('password2')">La contraseñas deben ser iguales</span>    
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-primary float-end"
+                            type="submit"
+                            [disabled]="miformulario.pending"
+                            >Crear</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+
+<h2>Form Valid:{{miformulario.valid}}</h2>
+
+<h2>Form Errors:{{miformulario.errors}}</h2>
+
+<h2>Form status:{{miformulario.status}}</h2>
+<h2>Form pending:{{miformulario.pending}}</h2>
+
+<h5>Nombre</h5>
+<pre>{{miformulario.controls.nombre.errors |json}}</pre>
+
+<h5>Email</h5>
+<pre>{{miformulario.controls.email.errors |json}}</pre>
+
+<h5>username</h5>
+<pre>{{miformulario.controls.username.errors |json}}</pre>
+
+<h5>Password</h5>
+<pre>{{miformulario.controls.password.errors |json}}</pre>
+
+<h5>Password2</h5>
+<pre>{{miformulario.controls.password2.errors |json}}</pre>
